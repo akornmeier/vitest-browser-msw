@@ -8,7 +8,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "test:browser": "vitest --workspace=vitest.workspace.ts"
+    "test:browser": "vitest --workspace=vitest.workspace.ts",
+    "test:msw": "vitest --workspace=vitest.workspace.ts test/msw-browser.test.ts test/interactive-browser.test.ts"
   },
   "devDependencies": {
     "@vitest/browser": "^3.0.7",
