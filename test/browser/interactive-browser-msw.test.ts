@@ -8,7 +8,7 @@ import {
   vi,
 } from "vitest";
 import { getByTestId, fireEvent, waitFor } from "@testing-library/dom";
-import { worker } from "./mocks/setup";
+import { worker } from "./setup.js";
 
 // Setup MSW for browser tests
 beforeAll(async () => {

@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeAll, afterAll, afterEach } from "vitest";
 import { getByTestId, getByText, waitFor } from "@testing-library/dom";
-import { worker } from "./mocks/setup.js";
+import { worker } from "./setup.js";
 
 // Setup MSW for browser tests
 beforeAll(async () => {

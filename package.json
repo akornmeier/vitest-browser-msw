@@ -1,25 +1,38 @@
 {
-  "name": "@vitest/example-test",
+  "name": "your-package",
   "type": "module",
-  "private": true,
-  "license": "MIT",
-  "main": "index.js",
+  "exports": {
+    ".": {
+      "browser": {
+        "import": "./dist/browser/index.js",
+        "require": "./dist/browser/index.cjs"
+      },
+      "node": {
+        "import": "./dist/node/index.js",
+        "require": "./dist/node/index.cjs"
+      },
+      "default": {
+        "import": "./dist/node/index.js",
+        "require": "./dist/node/index.cjs"
+      }
+    }
+  },
   "scripts": {
+    "build": "tsup",
     "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run",
-    "test:browser": "vitest --workspace=vitest.workspace.ts",
-    "test:msw": "vitest --workspace=vitest.workspace.ts test/msw-browser.test.ts test/interactive-browser.test.ts"
+    "test:browser": "vitest --config ./vitest.browser.config.ts",
+    "test:node": "vitest --config ./vitest.node.config.ts",
+    "test:all": "vitest --workspace"
   },
   "devDependencies": {
     "@vitest/browser": "^3.0.7",
     "@vitest/ui": "latest",
+    "happy-dom": "^17.1.9",
     "msw": "^2.7.3",
     "playwright": "^1.50.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.8.2",
     "vite": "latest",
     "vitest": "latest"
-  },
-  "stackblitz": {
-    "startCommand": "npm run test:ui"
   }
 }

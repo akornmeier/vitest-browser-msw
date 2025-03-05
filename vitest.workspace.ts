@@ -1,22 +1,37 @@
 import { defineWorkspace } from "vitest/config";
 
 export default defineWorkspace([
-  // If you want to keep running your existing tests in Node.js, uncomment the next line.
-  // 'vite.config.ts',
   {
-    extends: "vite.config.ts",
     test: {
+      name: "node",
+      include: ["test/node/**/*.test.ts"],
+      environment: "node",
+      setupFiles: ["test/node/setup.ts"],
+    },
+  },
+  {
+    test: {
+      name: "browser",
       browser: {
         enabled: true,
         provider: "playwright",
-        // https://vitest.dev/guide/browser/playwright
-        instances: [{ browser: "chromium" }],
+        name: "chromium",
+        instances: [
+          {
+            browser: "chromium",
+          },
+        ],
       },
-      setupFiles: ["./test/mocks/setup.ts"],
-      deps: {
-        inline: ["msw"],
-      },
+      include: ["test/browser/**/*.test.ts"],
       environment: "happy-dom",
+      setupFiles: ["test/browser/setup.ts"],
+      deps: {
+        optimizer: {
+          web: {
+            include: ["msw"],
+          },
+        },
+      },
     },
   },
 ]);
