@@ -1,5 +1,5 @@
 {
-  "name": "your-package",
+  "name": "vitest-browser-msw",
   "type": "module",
   "exports": {
     ".": {
@@ -34,9 +34,10 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest",
-    "test:browser": "vitest --config ./vitest.browser.config.ts",
-    "test:node": "vitest --config ./vitest.node.config.ts",
-    "test:all": "vitest --workspace"
+    "test:browser": "vitest --project browser",
+    "test:node": "vitest --project node",
+    "test:all": "vitest --workspace",
+    "test:ci": "vitest --workspace --run --reporter=verbose --no-color"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",
@@ -49,5 +50,6 @@
     "typescript": "^5.8.2",
     "vite": "latest",
     "vitest": "latest"
-  }
+  },
+  "packageManager": "pnpm@10.5.2"
 }
