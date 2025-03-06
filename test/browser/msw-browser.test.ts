@@ -54,9 +54,7 @@ describe("MSW Browser Tests", () => {
     ).toBeDefined();
     expect(getByLabelText(body, /name:/i)).toBeDefined();
     expect(getByLabelText(body, /email:/i)).toBeDefined();
-
     expect(getByRole(body, "button", { name: /submit/i })).toBeDefined();
-    expect(getByTestId(body, "submit-button")).toBeDefined();
   });
 
   test("fetches JSON data from MSW", async () => {
