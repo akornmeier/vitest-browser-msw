@@ -1,25 +1,29 @@
 import { describe, test, expect, beforeAll, afterAll, afterEach } from "vitest";
-import { server, API_BASE_URL } from "./setup.js";
+import { server, fetchMock } from "./setup.js";
 
 beforeAll(() => {
+  // Initialize MSW server before tests
   server.listen();
 });
 
 afterEach(() => {
-  server.close();
+  // Reset handlers after each test
+  server.resetHandlers();
 });
 
 afterAll(() => {
+  // Clean up after tests are done
   server.close();
 });
 
 describe("Node API Tests", () => {
   test("fetches users from mocked API", async () => {
-    const response = await fetch(`${API_BASE_URL}/api/users`);
+    // Use our custom fetchMock instead of the native fetch
+    const response = await fetchMock("/api/users");
     const data = await response.json();
 
     expect(data).toHaveProperty("users");
-    // expect(data.users).toHaveLength(3);
-    // expect(data.users[0].name).toBe("John Doe");
+    expect(data.users).toHaveLength(3);
+    expect(data.users[0].name).toBe("John Doe");
   });
 });

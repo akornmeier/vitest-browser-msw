@@ -36,10 +36,11 @@
     "test": "vitest",
     "test:browser": "vitest --project browser",
     "test:node": "vitest --project node",
-    "test:all": "vitest --workspace",
-    "test:ci": "vitest --workspace --run --reporter=verbose --no-color"
+    "test:all": "vitest --project browser --project node",
+    "test:ci": "vitest run --project browser --project node --reporter=verbose"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
     "@types/node": "^22.13.9",
     "@vitest/browser": "^3.0.7",
     "@vitest/ui": "latest",
