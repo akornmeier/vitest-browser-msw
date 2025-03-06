@@ -1,6 +1,5 @@
 import { describe, test, expect, beforeAll, afterAll, afterEach } from "vitest";
 import { server, API_BASE_URL } from "./setup.js";
-import fetch from "node-fetch";
 
 beforeAll(() => {
   server.listen();

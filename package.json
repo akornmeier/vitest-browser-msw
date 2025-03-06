@@ -4,16 +4,30 @@
   "exports": {
     ".": {
       "browser": {
-        "import": "./dist/browser/index.js",
-        "require": "./dist/browser/index.cjs"
+        "import": {
+          "types": "./dist/browser/browser.d.ts",
+          "default": "./dist/browser/browser.js"
+        }
       },
       "node": {
-        "import": "./dist/node/index.js",
-        "require": "./dist/node/index.cjs"
+        "import": {
+          "types": "./dist/node/node.d.ts",
+          "default": "./dist/node/node.js"
+        },
+        "require": {
+          "types": "./dist/node/node.d.ts",
+          "default": "./dist/node/node.cjs"
+        }
       },
       "default": {
-        "import": "./dist/node/index.js",
-        "require": "./dist/node/index.cjs"
+        "import": {
+          "types": "./dist/node/node.d.ts",
+          "default": "./dist/node/node.js"
+        },
+        "require": {
+          "types": "./dist/node/node.d.ts",
+          "default": "./dist/node/node.cjs"
+        }
       }
     }
   },
@@ -25,6 +39,7 @@
     "test:all": "vitest --workspace"
   },
   "devDependencies": {
+    "@types/node": "^22.13.9",
     "@vitest/browser": "^3.0.7",
     "@vitest/ui": "latest",
     "happy-dom": "^17.1.9",

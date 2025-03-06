@@ -1,13 +1,21 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "node16",
+    "module": "Preserve",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "esModuleInterop": true,
     "strict": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "outDir": "dist",
+    "lib": ["es2020", "dom"],
+    "types": ["vitest/globals", "node"],
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "include": ["src", "test"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

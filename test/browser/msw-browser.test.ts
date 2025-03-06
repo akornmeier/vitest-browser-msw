@@ -1,5 +1,10 @@
 import { describe, test, expect, beforeAll, afterAll, afterEach } from "vitest";
-import { getByTestId, getByText, waitFor } from "@testing-library/dom";
+import {
+  getByLabelText,
+  getByRole,
+  getByTestId,
+  getByText,
+} from "@testing-library/dom";
 import { worker } from "./setup.js";
 
 // Setup MSW for browser tests
@@ -20,42 +25,38 @@ afterAll(() => {
 
 describe("MSW Browser Tests", () => {
   test("loads basic HTML scaffold from MSW", async () => {
-    // Fetch the mock HTML page
+    // Fetch and render the mock HTML
     const response = await fetch("/test/basic");
-    const html = await response.text();
+    document.documentElement.innerHTML = await response.text();
 
-    // Set the HTML content
-    document.body.innerHTML = html;
+    const { body } = document;
 
-    // Verify that elements exist
-    const title = getByText(document.body, "Basic Test Page");
-    const paragraph = getByTestId(document.body, "paragraph");
-    const button = document.getElementById("test-button");
-
-    expect(title).toBeDefined();
+    expect(
+      getByRole(body, "heading", { name: /basic test page/i })
+    ).toBeDefined();
+    const paragraph = getByTestId(body, "paragraph");
     expect(paragraph).toBeDefined();
     expect(paragraph.textContent).toBe("This is a test paragraph");
-    expect(button).toBeDefined();
+    expect(getByText(body, /this is a test paragraph/i)).toBeDefined();
+    expect(getByRole(body, "button", { name: /click me/i })).toBeDefined();
   });
 
   test("loads form HTML scaffold from MSW", async () => {
-    // Fetch the mock HTML page
+    // Fetch and render the mock HTML
     const response = await fetch("/test/form");
-    const html = await response.text();
+    document.documentElement.innerHTML = await response.text();
 
-    // Set the HTML content
-    document.body.innerHTML = html;
+    const { body } = document;
 
     // Verify that elements exist
-    const title = getByText(document.body, "Form Test Page");
-    const nameInput = getByTestId(document.body, "name-input");
-    const emailInput = getByTestId(document.body, "email-input");
-    const submitButton = getByTestId(document.body, "submit-button");
+    expect(
+      getByRole(body, "heading", { name: /form test page/i, level: 1 })
+    ).toBeDefined();
+    expect(getByLabelText(body, /name:/i)).toBeDefined();
+    expect(getByLabelText(body, /email:/i)).toBeDefined();
 
-    expect(title).toBeDefined();
-    expect(nameInput).toBeDefined();
-    expect(emailInput).toBeDefined();
-    expect(submitButton).toBeDefined();
+    expect(getByRole(body, "button", { name: /submit/i })).toBeDefined();
+    expect(getByTestId(body, "submit-button")).toBeDefined();
   });
 
   test("fetches JSON data from MSW", async () => {
