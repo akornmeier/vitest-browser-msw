@@ -8,6 +8,7 @@ export const worker = setupWorker(...handlers);
 export async function setupMSW() {
   // Start the worker with custom options
   return worker.start({
+    quiet: true,
     onUnhandledRequest: "warn",
   });
 }
