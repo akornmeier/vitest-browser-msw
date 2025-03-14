@@ -33,17 +33,20 @@
   },
   "scripts": {
     "build": "tsup",
-    "test": "vitest",
-    "test:browser": "vitest --project browser",
-    "test:node": "vitest --project node",
-    "test:all": "vitest --project browser --project node",
-    "test:ci": "vitest run --project browser --project node --reporter=verbose"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:browser": "vitest run --environment browser",
+    "test:node": "vitest run --environment node",
+    "test:coverage": "vitest run --coverage",
+    "test:adapters": "vitest run tests/adapters",
+    "test:integration": "vitest run tests/integration"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@types/node": "^22.13.9",
     "@vitest/browser": "^3.0.7",
     "@vitest/ui": "latest",
+    "axe-core": "^4.10.3",
     "happy-dom": "^17.1.9",
     "msw": "^2.7.3",
     "playwright": "^1.50.1",
