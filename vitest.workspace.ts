@@ -23,7 +23,7 @@ export default defineWorkspace([
         ],
       },
       include: ["test/browser/**/*.test.ts"],
-      environment: "happy-dom",
+      // environment: "happy-dom",
       setupFiles: ["test/browser/setup.ts"],
       deps: {
         optimizer: {
